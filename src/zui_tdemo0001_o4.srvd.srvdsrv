@@ -1,0 +1,11 @@
+@EndUserText: {
+  label: 'Service Definition for Z_C_TDEMO0001'
+}
+@ObjectModel: {
+  leadingEntity: {
+    name: 'Z_C_TDEMO0001'
+  }
+}
+define service ZUI_TDEMO0001_O4 provider contracts odata_v4_ui {
+  expose Z_C_TDEMO0001 as Connections;
+}

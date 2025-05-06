@@ -1,0 +1,60 @@
+managed implementation in class ZBP_R_TDEMO0002 unique;
+strict ( 2 );
+with draft;
+define behavior for ZR_TDEMO0002 alias flight
+persistent table ztdemo0002
+draft table ztdemo0002_d
+etag master LocalLastChangedAt
+lock master total etag LastChangedAt
+authorization master ( global )
+
+{
+  field ( mandatory : create )
+  CarrierId,
+  ConnectionId,
+  FlightDate;
+
+  field ( readonly )
+  LocalCreateBy,
+  LocalCreateAt,
+  LocalLastChangedBy,
+  LocalLastChangedAt,
+  LastChangedAt;
+
+  field ( readonly : update )
+  CarrierId,
+  ConnectionId,
+  FlightDate;
+
+
+  create;
+  update;
+  delete;
+
+
+  validation ValidatePrice    on save { create; field Price; }
+  validation ValidateCurrency on save { create; field CurrencyCode; }
+
+  draft action Activate optimized;
+  draft action Discard;
+  draft action Edit;
+  draft action Resume;
+  draft determine action Prepare;
+
+  mapping for ztdemo0002
+    {
+      CarrierId          = carrier_id;
+      ConnectionId       = connection_id;
+      FlightDate         = flight_date;
+      Price              = price;
+      CurrencyCode       = currency_code;
+      PlaneTypeId        = plane_type_id;
+      SeatsMax           = seats_max;
+      SeatsOccupied      = seats_occupied;
+      LocalCreateBy      = local_create_by;
+      LocalCreateAt      = local_create_at;
+      LocalLastChangedBy = local_last_changed_by;
+      LocalLastChangedAt = local_last_changed_at;
+      LastChangedAt      = last_changed_at;
+    }
+}
